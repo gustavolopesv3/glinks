@@ -3,17 +3,17 @@ import { TouchableOpacity, View, TouchableWithoutFeedback, Share } from 'react-n
 import {Feather} from '@expo/vector-icons'
 import {ModalContainer, Container, Header, LinkArea, Title, LongUrl, ShortLinkArea, ShortLinkUrl} from './styles'
 import Clipboard from 'expo-clipboard'
-export function ModalLink({onClose}){
+export function ModalLink({onClose, linkEncurtado}){
 
   function copyLink(){
-    Clipboard.setString('https://lopesit.com.br')
+    Clipboard.setString(linkEncurtado.link)
     alert('Link copiado')
   }
 
   async function handleShare(){
     try {
       const result = await Share.share({
-        message: `Link: seulink.com`
+        message: `Link: ${linkEncurtado.link}`
       })
       if(result.action === Share.sharedAction){
         if(result.activityType){
@@ -47,9 +47,9 @@ export function ModalLink({onClose}){
       </Header>
       <LinkArea>
         <Title>Link encurtado</Title>
-        <LongUrl numberOfLines={1}>https://www.lopesit.com.br</LongUrl>
+        <LongUrl numberOfLines={1}>{linkEncurtado.long_url}</LongUrl>
         <ShortLinkArea activeOpacity={1} onPress={copyLink}>
-          <ShortLinkUrl numberOfLines={1}>https://bit.ly/kwjer</ShortLinkUrl>
+          <ShortLinkUrl numberOfLines={1}>{linkEncurtado.link}</ShortLinkUrl>
           <TouchableOpacity onPress={copyLink}>
             <Feather name='copy' color='#fff' size={25}/>
           </TouchableOpacity>

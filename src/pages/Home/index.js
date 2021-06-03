@@ -99,7 +99,7 @@ export function Home(){
           </ContainerContent>
         </KeyboardAvoidingView>
         <Modal visible={modalVisible} transparent animationType='slide'>
-          <ModalLink onClose={()=>SetModelVisible(false)}/>
+          <ModalLink onClose={()=>SetModelVisible(false)} linkEncurtado={data}/>
         </Modal>
       </LinearGradient>
     </TouchableWithoutFeedback>
