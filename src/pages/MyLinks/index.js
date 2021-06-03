@@ -19,8 +19,7 @@ export function MyLinks(){
           
           <ListLinks
           data={
-            [{id: 1, link:'texte.com'},
-            {id: 2, link:'text2.com'}]
+            [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
           }
           keyExtractor={(item)=> String(item.id)}
           renderItem={({item})=> <ListItem data={item}/>}

@@ -1,14 +1,11 @@
 import axios from 'axios'
-
-
-
-const key = 'e6b5549eaae8114b7ec693b41034d7648af170c1'
+import {BITLY_TOKEN} from '@env'
 
 
 export const api = axios.create({
   baseURL: 'https://api-ssl.bitly.com/v4',
   headers: {
-    'Authorization': `Bearer ${key}`,
+    'Authorization': `Bearer ${BITLY_TOKEN}`,
     'Content-Type': 'application/json'
 }
 })
