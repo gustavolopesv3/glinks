@@ -1,21 +1,34 @@
 import React from 'react'
-import {View, Text} from 'react-native'
 import {StatusBarPage} from '../../components/StatusBarPage'
-import {LinearGradient} from 'expo-linear-gradient'
+import { Container, Title,ListLinks } from './styles'
+import { Menu } from '../../components/Menu'
+import { ListItem } from '../../components/ListItem'
+import { Text } from 'react-native'
 
 export function MyLinks(){
   return(
-    <LinearGradient 
-    colors={['#132742', '#1ddbb9']}
-    style={{flex:1 , justifyContent:'center'}}
-    >
-      <StatusBarPage 
-      barStyle='light-content'
-      backgroundColor= '#132742'
-      />
-      <Text>
-        Pagina Home
-      </Text>
-    </LinearGradient>
+
+      
+        <Container>
+          <StatusBarPage 
+          barStyle='light-content'
+          backgroundColor= '#132742'
+          />
+          <Menu/>
+          <Title>Meus Links</Title>
+          
+          <ListLinks
+          data={
+            [{id: 1, link:'texte.com'},
+            {id: 2, link:'text2.com'}]
+          }
+          keyExtractor={(item)=> String(item.id)}
+          renderItem={({item})=> <ListItem data={item}/>}
+          contentContainerStyle={{paddingBottom:20}}
+          showsVerticalScrollIndicator={false}
+          />
+        </Container>
+
+
   )
 }
