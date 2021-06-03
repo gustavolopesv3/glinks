@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {TouchableWithoutFeedback, Keyboard,
   KeyboardAvoidingView, 
-  Platform, Modal} from 'react-native'
+  Platform, Modal, ActivityIndicator} from 'react-native'
 import {LinearGradient} from 'expo-linear-gradient'
 import {StatusBarPage} from '../../components/StatusBarPage'
 import {Menu} from '../../components/Menu'
@@ -18,14 +18,38 @@ ButtonLink,
 ButtonLinkText} from './styles'
 import {Feather} from '@expo/vector-icons'
 import { ModalLink } from '../../components/ModalLink'
+import {api} from '../../services/api'
 
 export function Home(){
   const [linkInput, SetLinkInPut] = useState('')
+  const [data, setData] = useState({})
   const [modalVisible, SetModelVisible] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
-  function handleShortLink(){
+   async function handleShortLink(){
+    setIsLoading(true)
+    try {
+      const response = await api.post('/shorten',
+    {
+      long_url: linkInput, 
+    })
+    
+    setData(response.data)
     SetModelVisible(true)
+
+    Keyboard.dismiss()
+    setIsLoading(false)
+    SetLinkInPut('')
+
+    } catch{
+      alert('ops... algo deu errado, verifique seu link')
+      Keyboard.dismiss()
+      SetLinkInPut('')
+      setIsLoading(false)
+    }
+    //SetModelVisible(true)
   }
+
 
   return(
     <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
@@ -65,7 +89,12 @@ export function Home(){
                 
             </ContainerInput>
             <ButtonLink onPress={handleShortLink}>
-              <ButtonLinkText>Gerar Link</ButtonLinkText>
+              {
+                isLoading ?(
+                  <ActivityIndicator color='#121212' size={24}/>
+                ):(<ButtonLinkText>Gerar Link</ButtonLinkText>)
+              }
+              
             </ButtonLink>
           </ContainerContent>
         </KeyboardAvoidingView>
