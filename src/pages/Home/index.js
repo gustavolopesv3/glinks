@@ -1,9 +1,20 @@
 import React from 'react'
-
-import {View, Text} from 'react-native'
 import {LinearGradient} from 'expo-linear-gradient'
 import {StatusBarPage} from '../../components/StatusBarPage'
 import {Menu} from '../../components/Menu'
+import {
+  ContainerLogo,
+  Logo, 
+  ContainerContent,
+  Title, 
+  SubTitle,
+  ContainerInput,
+  BoxIcon,
+  Input,
+ButtonLink,
+ButtonLinkText} from './styles'
+import {Feather} from '@expo/vector-icons'
+
 export function Home(){
   return(
     <LinearGradient 
@@ -15,9 +26,24 @@ export function Home(){
       backgroundColor= '#1ddbb9'
       />
       <Menu/>
-      <Text>
-        Pagina Home
-      </Text>
+      <ContainerLogo>
+        <Logo source={require('../../assets/Logo.png')}/>
+      </ContainerLogo>
+      <ContainerContent>
+        <Title>GLink</Title>
+        <SubTitle>Cole seu link para encurtar</SubTitle>
+
+
+        <ContainerInput>
+          <BoxIcon>
+            <Feather name='link' size={22} color='#fff'/>
+          </BoxIcon>
+            <Input placeholder='cole seu link aqui...' placeholderTextColor='white'/>
+        </ContainerInput>
+        <ButtonLink>
+          <ButtonLinkText>Gerar Link</ButtonLinkText>
+        </ButtonLink>
+      </ContainerContent>
     </LinearGradient>
   )
 }
