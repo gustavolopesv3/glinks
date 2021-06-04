@@ -16,15 +16,22 @@ export async function saveLink(key, newLink){
   //  verificar se ja existe um link
   const hasLink = linkStoraged.some(link => link.id === newLink.id)
   if(hasLink){
-    console.log('Esse link ja existe na lista')
+    //link ja existe na lista
     return
   }
 
   linkStoraged.push(newLink)
   await AsyncStorage.setItem(key, JSON.stringify(linkStoraged))
-  console.log('Link salvo com sucesso')
+
 }
 
 export async function deleteLink(links, id){
+  let myLinks = links.filter((item)=>{
+    return(item.id !== id)
+  })
 
+  await AsyncStorage.setItem('GLinks', JSON.stringify(myLinks))
+
+
+  return myLinks
 }

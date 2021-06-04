@@ -6,7 +6,7 @@ import { Container, Title,ListLinks } from './styles'
 import { Menu } from '../../components/Menu'
 import { ListItem } from '../../components/ListItem'
 import {useIsFocused} from '@react-navigation/native'
-import {getLinksSave} from '../../utils/storageLinks'
+import {getLinksSave, deleteLink} from '../../utils/storageLinks'
 
 
 export function MyLinks(){
@@ -30,6 +30,12 @@ export function MyLinks(){
     SetModelVisible(true)
   }
 
+  async function handleDelete(id){
+    const result = await deleteLink(links, id)
+    setLinks(result)
+  }
+
+
   return(
   
         <Container>
@@ -43,7 +49,7 @@ export function MyLinks(){
           <ListLinks
           data={links}
           keyExtractor={(item)=> String(item.id)}
-          renderItem={({item})=> <ListItem data={item} selectedItem={handleItem}/>}
+          renderItem={({item})=> <ListItem data={item} selectedItem={handleItem} deleteItem={handleDelete}/>}
           contentContainerStyle={{paddingBottom:20}}
           showsVerticalScrollIndicator={false}
           />
