@@ -19,6 +19,7 @@ ButtonLinkText} from './styles'
 import {Feather} from '@expo/vector-icons'
 import { ModalLink } from '../../components/ModalLink'
 import {api} from '../../services/api'
+import {saveLink} from '../../utils/storageLinks'
 
 export function Home(){
   const [linkInput, SetLinkInPut] = useState('')
@@ -36,6 +37,10 @@ export function Home(){
     
     setData(response.data)
     SetModelVisible(true)
+    
+    //salvar o link no storage
+    saveLink('GLinks', response.data)
+
 
     Keyboard.dismiss()
     setIsLoading(false)
