@@ -1,12 +1,13 @@
 import React,{useState, useEffect} from 'react'
-import {Modal} from 'react-native'
-import {ModalLink} from '../../components/ModalLink'
-import {StatusBarPage} from '../../components/StatusBarPage'
-import { Container, Title,ListLinks } from './styles'
-import { Menu } from '../../components/Menu'
-import { ListItem } from '../../components/ListItem'
+import {Modal, ActivityIndicator} from 'react-native'
 import {useIsFocused} from '@react-navigation/native'
 import {getLinksSave, deleteLink} from '../../utils/storageLinks'
+
+import {StatusBarPage} from '../../components/StatusBarPage'
+import {ModalLink} from '../../components/ModalLink'
+import { ListItem } from '../../components/ListItem'
+import { Menu } from '../../components/Menu'
+import { Container, Title,ListLinks, ContainerEmpy, WarningText  } from './styles'
 
 
 export function MyLinks(){
@@ -16,11 +17,13 @@ export function MyLinks(){
   const [links, setLinks] = useState([])
   const [dataLink, setDataLink] = useState({})
   const [modalVisible, SetModelVisible] = useState(false)
+  const [isLoading, SetIsLoading] = useState(false)
 
   useEffect(()=>{
     async function getLinks(){
       const result = await getLinksSave('GLinks')
       setLinks(result)
+      SetIsLoading(false)
     }
     getLinks()
   },[isFocused])
@@ -45,7 +48,19 @@ export function MyLinks(){
           />
           <Menu/>
           <Title>Meus Links</Title>
-          
+
+          { isLoading && (
+            <ContainerEmpy>
+            <ActivityIndicator color='#fff' size={25}/>
+          </ContainerEmpy>
+          ) }
+
+          {!isLoading && links.length === 0 && (
+            <ContainerEmpy>
+              <WarningText>Parece que sua lista estar vazia :/ </WarningText>
+            </ContainerEmpy>
+          )
+          }
           <ListLinks
           data={links}
           keyExtractor={(item)=> String(item.id)}

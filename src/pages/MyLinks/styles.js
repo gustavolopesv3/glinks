@@ -19,3 +19,14 @@ color: #fff;
 export const ListLinks = styled.FlatList`
 
 `
+
+export const ContainerEmpy = styled.View`
+margin-top: 25%;
+align-items: center;
+
+
+`
+export const WarningText = styled.Text`
+font-size: 17px;
+color: #fff;
+`

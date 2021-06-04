@@ -29,3 +29,9 @@ margin: 7px 10px;
 `
 
 
+export const ContainerEmpy = styled.View`
+background-color: #fff
+`
+export const WarningText = styled.Text`
+color: #fff;
+`
