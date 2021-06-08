@@ -47,7 +47,7 @@ export function MyLinks(){
           backgroundColor= '#132742'
           />
           <Menu/>
-          <Title>Meus Links</Title>
+          <Title>Meus Links...</Title>
 
           { isLoading && (
             <ContainerEmpy>
